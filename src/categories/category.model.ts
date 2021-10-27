@@ -9,14 +9,14 @@ interface CategoryCreationAttr {
 @Table({tableName: 'categories'})
 export class Category extends Model<Category, CategoryCreationAttr> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
-    id: number
+    id: number;
 
     @Column({type: DataType.STRING, unique: true, allowNull: false})
-    title: string
+    title: string;
 
     // @OneToMany(() => Product, product => product.category_id)
     // product: Product[];
 
     @HasMany(() => Product)
-    products: Product[]
+    products: Product[];
 }

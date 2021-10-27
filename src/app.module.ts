@@ -9,10 +9,11 @@ import { ConfigModule } from "@nestjs/config";
 import {Product} from "./products/product.model";
 import {Category} from "./categories/category.model";
 import {Basket} from "./basket/basket.model";
+import {UsersModule} from "./users/users.module";
 
 
 @Module({
-  imports: [BasketModule, CategoriesModule, ProductsModule,
+  imports: [BasketModule, CategoriesModule, ProductsModule, UsersModule,
       ConfigModule.forRoot({
         envFilePath: '.env'
       }),

@@ -11,26 +11,26 @@ interface ProductCreationAttr {
 @Table({tableName: 'products'})
 export class Product extends Model<Product, ProductCreationAttr> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
-    id: number
+    id: number;
 
     @Column({type: DataType.STRING, unique: true, allowNull: false})
-    title: string
+    title: string;
 
     @Column({type: DataType.STRING})
-    description: string
+    description: string;
 
     @Column({type: DataType.INTEGER, allowNull: false})
-    price: number
+    price: number;
 
     @Column({type: DataType.INTEGER, allowNull: false})
-    count: number
+    count: number;
 
     @Column({type: DataType.INTEGER})
     @ForeignKey(() => Category)
-    category_id: number
+    category_id: number;
 
 
     @BelongsTo(() => Category)
-    category: Category
+    category: Category;
 
 }

@@ -11,7 +11,8 @@ import {UsersModule} from "../users/users.module";
     controllers: [BasketController],
     imports: [
         SequelizeModule.forFeature([Basket, Product]), UsersModule
-    ]
+    ],
+    exports: [BasketService]
 })
 
 export class BasketModule{

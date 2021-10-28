@@ -9,15 +9,18 @@ export class BasketService {
     constructor(@InjectModel(Basket) private basketRepository: typeof Basket,
                 @InjectModel(Product) private productRepository: typeof Product ){}
 
-    async get(){
-        const basket = await this.basketRepository.findAll();
+    async get(request: any){
+        const basket = await this.basketRepository.findAll({
+            where: {user_id: request.user.id}
+        });
         return basket;
     }
 
-    async addProduct(id: string){
+    async addProduct(id: string, request: any) {
+        const user = request.user;
         const product = await this.productRepository.findByPk(id);
         const product_in_basket = await this.basketRepository.findOne({
-            where: { product_id: id },
+            where: { product_id: id, user_id: user.id },
         });
 
         if (product.count != 0){
@@ -34,21 +37,25 @@ export class BasketService {
                 await this.basketRepository.create({
                     product_id: product.id,
                     price: product.price,
-                    count: 1
+                    count: 1,
+                    user_id: user.id
                 });
             }
         } else {
             return 'Товар закончился';
         }
 
-        return this.basketRepository.findAll();
+        return this.basketRepository.findAll({
+            where: {user_id: user.id}
+        });
     }
 
 
-    async deleteProduct(id: string){
+    async deleteProduct(id: string, request: any){
+        const user = request.user;
         const product = await this.productRepository.findByPk(id);
         const product_in_basket = await this.basketRepository.findOne({
-            where: { product_id: id },
+            where: { product_id: id, user_id: user.id },
         });
 
         if (product_in_basket) {
@@ -64,11 +71,16 @@ export class BasketService {
             return "Такого товара нет в корзине";
         }
 
-        return this.basketRepository.findAll();
+        return this.basketRepository.findAll({
+            where: {user_id: user.id}
+        });
     }
 
-    async ordering(){
-        const products = await this.basketRepository.findAll();
+
+    async deleting_basket(user: any){
+        const products = await this.basketRepository.findAll({
+            where: {user_id: user.id}
+        });
         products.forEach(async (element) => {
             const product = await this.productRepository.findByPk(element.product_id);
             product.update({
@@ -76,7 +88,6 @@ export class BasketService {
             });
             await element.destroy();
         });
-        return this.basketRepository.findAll();
     }
 
 }

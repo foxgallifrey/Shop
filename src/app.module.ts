@@ -10,10 +10,14 @@ import {Product} from "./products/product.model";
 import {Category} from "./categories/category.model";
 import {Basket} from "./basket/basket.model";
 import {UsersModule} from "./users/users.module";
+import {OrdersModule} from "./orders/orders.module";
+import {Order} from "./orders/order.model";
+import {OrderItems} from "./order_items/order_items.model";
+import {OrderItemsModule} from "./order_items/order_items.module";
 
 
 @Module({
-  imports: [BasketModule, CategoriesModule, ProductsModule, UsersModule,
+  imports: [BasketModule, CategoriesModule, ProductsModule, UsersModule, OrdersModule, OrderItemsModule,
       ConfigModule.forRoot({
         envFilePath: '.env'
       }),
@@ -24,7 +28,7 @@ import {UsersModule} from "./users/users.module";
         username: process.env.POSTGRES_USER,
         password: process.env.POSTGRES_PASSWORD,
         database: process.env.POSTGRES_DB,
-        models: [Product, Category, Basket],
+        models: [Product, Category, Basket, Order, OrderItems],
         autoLoadModels: true
       }),
   ],

@@ -6,6 +6,7 @@ interface BasketCreationAttr {
     product_id: number
     price: number
     count: number
+    user_id: number
 }
 
 @Table({tableName: 'basket'})

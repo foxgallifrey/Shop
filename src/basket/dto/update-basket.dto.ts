@@ -4,13 +4,17 @@ export class UpdateBasketDTO {
 
     @IsNotEmpty({message: "Не должно быть пустым"})
     @IsNumber({}, {message: "Должно быть числом"})
-    readonly product_id: number
+    readonly product_id: number;
 
     @IsNotEmpty({message: "Не должно быть пустым"})
     @IsNumber({}, {message: "Должно быть числом"})
-    readonly count: number
+    readonly count: number;
 
     @IsNotEmpty({message: "Не должно быть пустым"})
     @IsNumber({}, {message: "Должно быть числом"})
-    readonly price: number
+    readonly price: number;
+
+    @IsNotEmpty({message: "Не должно быть пустым"})
+    @IsNumber({}, {message: "Должно быть числом"})
+    readonly user_id: number;
 }

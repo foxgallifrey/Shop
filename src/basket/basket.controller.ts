@@ -1,6 +1,6 @@
 import {
     Controller, Get, Post, Put, Delete, Param, Body, HttpCode, HttpStatus, UsePipes,
-    UseGuards
+    UseGuards, Req
 } from '@nestjs/common';
 import {ValidationPipe} from "../pipes/validation.pipe";
 import {JwtAuthGuard} from "../users/jwt-auth.guard";
@@ -15,30 +15,23 @@ export class BasketController {
     @Get()
     @HttpCode(HttpStatus.OK)
     @UseGuards(JwtAuthGuard)
-    get(){
-        return this.basketService.get();
+    get(@Req() request: any){
+        return this.basketService.get(request);
     }
 
     @Post(':id')
     @HttpCode(HttpStatus.CREATED)
-    @UsePipes(ValidationPipe)
     @UseGuards(JwtAuthGuard)
-    addProduct(@Param('id') id: string){
-        return this.basketService.addProduct(id);
+    addProduct(@Param('id') id: string, @Req() request: any){
+        return this.basketService.addProduct(id, request);
     }
 
     @Delete(':id')
     @HttpCode(HttpStatus.OK)
     @UseGuards(JwtAuthGuard)
-    deleteProduct(@Param('id') id: string){
-        return this.basketService.deleteProduct(id);
+    deleteProduct(@Param('id') id: string, @Req() request: any){
+        return this.basketService.deleteProduct(id, request);
     }
 
-    @Post()
-    @HttpCode(HttpStatus.CREATED)
-    @UseGuards(JwtAuthGuard)
-    ordering(){
-        return this.basketService.ordering();
-    }
 
 }

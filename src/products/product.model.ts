@@ -1,6 +1,7 @@
-import {BelongsTo, Column, DataType, ForeignKey, Model, Table} from "sequelize-typescript";
+import {BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table} from "sequelize-typescript";
 import {ManyToOne} from "typeorm";
 import {Category} from "../categories/category.model";
+import {OrderItems} from "../order_items/order_items.model";
 
 interface ProductCreationAttr {
     title: string
@@ -29,8 +30,10 @@ export class Product extends Model<Product, ProductCreationAttr> {
     @ForeignKey(() => Category)
     category_id: number;
 
-
     @BelongsTo(() => Category)
     category: Category;
+
+    @HasMany(() => OrderItems)
+    order_items: OrderItems[];
 
 }

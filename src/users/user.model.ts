@@ -1,4 +1,5 @@
-import {Column, DataType, Model, Table} from "sequelize-typescript";
+import {BelongsTo, Column, DataType, ForeignKey, HasMany, HasOne, Model, Table} from "sequelize-typescript";
+import {Order} from "../orders/order.model";
 
 interface UserCreationAttr {
     email: string
@@ -22,6 +23,9 @@ export class User extends Model<User, UserCreationAttr> {
 
     @Column({type: DataType.BOOLEAN, allowNull: false, defaultValue: false})
     is_admin: boolean;
+
+    @HasMany(() => Order)
+    orders: Order[];
 
 
 }

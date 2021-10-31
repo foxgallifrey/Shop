@@ -9,16 +9,16 @@ export class OrderItemsService {
 
     constructor(@InjectModel(OrderItems) private orderItemsRepository: typeof OrderItems){}
 
-    async createItems(products: any, order_id: number){
-        Object.keys(products).forEach((key) => {
-            this.orderItemsRepository.create({
-                count: products[key].count,
-                price: products[key].price,
-                product_id: products[key].product_id,
-                order_id: order_id
-            })
-        });
-        return 'OK';
-    }
+    // async createItems(products: any, order_id: number){
+    //     Object.keys(products).forEach((key) => {
+    //         this.orderItemsRepository.create({
+    //             count: products[key].count,
+    //             price: products[key].price,
+    //             product_id: products[key].product_id,
+    //             order_id: order_id
+    //         })
+    //     });
+    //     return 'OK';
+    // }
 
 }

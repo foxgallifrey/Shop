@@ -1,5 +1,5 @@
-import {Column, DataType, ForeignKey, HasMany, Model, Table} from "sequelize-typescript";
-import {OneToOne} from "typeorm";
+import {BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table} from "sequelize-typescript";
+import {ManyToOne, OneToOne} from "typeorm";
 import {Product} from "../products/product.model";
 import {Order} from "../orders/order.model";
 
@@ -25,13 +25,14 @@ export class OrderItems extends Model<OrderItems, OrderItemsCreationAttr> {
     @ForeignKey(() => Product)
     product_id: number;
 
-    @OneToOne(() => Product)
+    @BelongsTo(() => Product)
     product: Product;
 
     @Column({type: DataType.INTEGER, allowNull: false})
     @ForeignKey(() => Order)
     order_id: number;
 
-    @OneToOne(() => Order)
+    @BelongsTo(() => Order)
     order: Order;
+
 }

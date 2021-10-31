@@ -21,6 +21,14 @@ export class ProductsService {
     }
 
     async createProduct(createProduct: CreateProductDTO){
+        const exist_product = this.productRepository.findOne({
+            where: {title: createProduct.title}
+        });
+
+        if (exist_product){
+            return {"title":  "должно быть уникальным"};
+        }
+
         const product = await this.productRepository.create(createProduct);
         return product;
     }

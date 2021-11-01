@@ -19,10 +19,10 @@ export class CategoriesController {
         return this.categotyService.getAll();
     }
 
-    @Get(':id')
+    @Get(':title')
     @HttpCode(HttpStatus.OK)
-    getOne(@Param('id') id: string){
-        return this.categotyService.getOne(id);
+    getOne(@Param('title') title: string){
+        return this.categotyService.getOne(title);
     }
 
     @Post()

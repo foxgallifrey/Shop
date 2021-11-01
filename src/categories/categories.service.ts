@@ -15,8 +15,11 @@ export class CategoriesService {
         return categories;
     }
 
-    async getOne(id: string){
-        const products = await this.categoryRepository.findByPk(id, { include: Product });
+    async getOne(title: string){
+        const products = await this.categoryRepository.findOne({
+            where: {title: title},
+            include: Product
+        });
         return products;
     }
 

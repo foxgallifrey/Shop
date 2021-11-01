@@ -13,6 +13,7 @@ import {Order} from "./orders/order.model";
 import {OrderItems} from "./order_items/order_items.model";
 import {OrderItemsModule} from "./order_items/order_items.module";
 import {User} from "./users/user.model";
+import {EventEmitterModule} from "@nestjs/event-emitter";
 
 
 @Module({
@@ -30,6 +31,15 @@ import {User} from "./users/user.model";
         models: [Product, Category, Order, OrderItems, User],
         autoLoadModels: true
       }),
+      EventEmitterModule.forRoot({
+          wildcard: false,
+          delimiter: '.',
+          newListener: false,
+          removeListener: false,
+          maxListeners: 10,
+          verboseMemoryLeak: false,
+          ignoreErrors: false,
+      })
   ],
   controllers: [AppController],
   providers: [AppService],
